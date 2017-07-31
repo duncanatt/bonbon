@@ -1,0 +1,69 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemebonbon}[2017/07/30 Bonbon color theme]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Required packages and configuration.                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{color}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Color definitions.                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Body colors.
+\definecolor{dirtywhite}{RGB}{250, 250, 250}
+\definecolor{smokegray}{RGB}{40, 40, 40}
+\definecolor{headblack}{RGB}{20, 20, 20}
+
+% Title colors.
+\definecolor{bloodred}{RGB}{168, 43, 51}
+\definecolor{royalblue}{RGB}{53, 171, 223}
+
+% Block colors.
+\definecolor{lightash}{RGB}{230, 230, 230}
+\definecolor{darkash}{RGB}{211, 211, 211}
+\definecolor{mossgreen}{RGB}{34, 171, 66}
+\definecolor{amber}{RGB}{233, 129, 45}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Color styles.                                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Text and background colors.
+\setbeamercolor{normal text}{fg=smokegray}
+\setbeamercolor{background canvas}{bg=dirtywhite}
+
+% Title page colors.
+\setbeamercolor{title page}{fg=dirtywhite, bg=bloodred}
+\setbeamercolor{title}{fg=dirtywhite}
+\setbeamercolor{subtitle}{fg=dirtywhite}
+\setbeamercolor{subsubtitle}{fg=headblack}
+
+% TOC colors.
+\setbeamercolor{section in toc}{fg=smokegray}
+
+% Frame and section colors.
+\setbeamercolor{frametitle}{fg=bloodred}
+\setbeamercolor{section title}{fg=bloodred}
+\setbeamercolor{section page}{fg=bloodred, bg=dirtywhite}
+\setbeamercolor{subsection title}{fg=dirtywhite}
+\setbeamercolor{subsection page}{fg=dirtywhite, bg=royalblue}
+
+% List colors.
+\setbeamercolor{itemize item}{fg=smokegray}
+\setbeamercolor{enumerate item}{fg=smokegray}
+\setbeamercolor{description item}{fg=smokegray}
+
+% Block colors.
+\setbeamercolor{alerted text}{fg=royalblue}
+\setbeamercolor{example text}{fg=mossgreen}
+\setbeamercolor{block title}{fg=smokegray, bg=darkash}
+\setbeamercolor{block body}{fg=smokegray, bg=lightash}
+\setbeamercolor{block title alerted}{fg=amber, bg=darkash}
+\setbeamercolor{block body alerted}{fg=smokegray, bg=lightash}
+\setbeamercolor{block title example}{fg=mossgreen, bg=darkash}
+\setbeamercolor{block body example}{fg=smokegray, bg=lightash}
+
+\mode<all>

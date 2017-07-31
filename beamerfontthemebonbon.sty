@@ -1,0 +1,53 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerfontthemebonbon}[2017/07/30 Bonbon font theme]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Required packages and configuration.                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{fontspec}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font definitions.                                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define new fonts.
+\newfontfamily\lobster{Lobster Two}
+
+% Set font style based on the Fira Sans and Fira Mono fonts.
+%\setsansfont[ItalicFont={Fira Sans Light Italic},
+%						 BoldFont={Fira Sans},
+%						 BoldItalicFont={Fira Sans Italic}]
+%						{Fira Sans Light}
+%\setmonofont[BoldFont={Fira Mono Medium}]{Fira Mono}
+
+% Set font style based on the Open Sans and Cousine fonts.
+\setsansfont[ItalicFont={Open Sans Light Italic},
+						 BoldFont={Open Sans SemiBold},
+						 BoldItalicFont={Open Sans SemiBold Italic}]
+						{Open Sans Light}
+\setmonofont[ItalicFont={Cousine Italic},
+						 BoldFont={Cousine Bold},
+						 BoldItalicFont={Cousine Bold Italic}]{Cousine}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font styles.                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont{title}{size=\Huge, shape=\itshape, family=\lobster}
+\setbeamerfont{title page}{size=\Huge, shape=\itshape, family=\lobster}
+\setbeamerfont{subtitle}{size=\scriptsize, series=\normalfont}
+\setbeamerfont{subsubtitle}{size=\scriptsize, series=\normalfont}
+\setbeamerfont{section title}{size=\huge}
+\setbeamerfont*{subsection title}{size=\huge, series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize, series=\bfseries}
+\setbeamerfont{block title alerted}{size=\normalsize, series=\bfseries}
+
+\setbeamerfont{frametitle}{size=\LARGE, shape=\itshape, family=\lobster}
+\setbeamerfont{caption}{size=\small}
+\setbeamerfont{caption name}{series=\bfseries}
+\setbeamerfont{description item}{series=\bfseries}
+
+\mode<all>

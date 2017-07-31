@@ -1,0 +1,193 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemebonbon}[2017/07/30 Bonbon inner theme]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Required packages and configuration.                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{calc}
+\RequirePackage{tikz}
+\RequirePackage{xkeyval}
+
+% Configure libraries to be imported by TikZ.
+\usetikzlibrary{
+  calc,
+  arrows
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Variables used to calculate slide dimensions and progress bar width.         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The separation lengths that determine by how much the slide content is shifted
+% to the right.
+\newlength{\smlsep}
+\setlength{\smlsep}{0.4cm}
+\newlength{\bigsep}
+\setlength{\bigsep}{0.8cm}
+
+% The template uses two page dimensions, the smaller one for title pages, and
+% the larger one for slide content.
+\newlength{\smlpagewidth}
+\setlength{\smlpagewidth}{\paperwidth - (\bigsep * 2)}
+\newlength{\smlpageheight}
+\setlength{\smlpageheight}{\paperheight - (\bigsep * 2)}
+\newlength{\bigpagewidth}
+\setlength{\bigpagewidth}{\paperwidth - (\smlsep * 2)}
+\newlength{\bigpageheight}
+\setlength{\bigpageheight}{\paperheight - (\smlsep * 2)}
+
+% The template features a progress bar which shows indicates the current
+% presentation progress. It comes in two flavours, one that fits \smlpagewidth
+% and the other that fits \bigpagewidth.
+% The two macros below calculate the length of the progress bar in both cases.
+\newlength{\smlproglen}
+\newlength{\bigproglen}
+\newcommand{\updatesmlproglen}{\setlength{\smlproglen}{(\smlpagewidth * \insertframenumber) / \inserttotalframenumber}\relax}
+\newcommand{\updatebigproglen}{\setlength{\bigproglen}{(\bigpagewidth * \insertframenumber) / \inserttotalframenumber}\relax}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inner template styles.                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{itemize items}{\textbullet}
+\setbeamertemplate{description item}{\insertdescriptionitem\hfill}
+\setbeamertemplate{caption}{\insertcaption}
+\setbeamertemplate{caption label separator}{}
+
+\setbeamertemplate{title page} {
+
+  % Add this to remove the white top border that appears.
+  \nointerlineskip
+
+	\begin{beamercolorbox}[wd=\paperwidth, ht=\paperheight, sep=\bigsep]{title page}
+    \begin{tikzpicture}
+
+		  % Set the smaller size of slide as the canvas over which we will draw.
+			\useasboundingbox (0, 0) rectangle (\smlpagewidth, \smlpageheight);
+
+      % Draw title, subtitle, author and date text.
+			\node [anchor=west, rotate=0] at (current bounding box.west) [font={\usebeamerfont{title}\usebeamercolor[fg]{title}}] (title) {\inserttitle};
+			\node [anchor=west, yshift=-0.0cm] at (title.south west) [font={\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}}] (subtitle) {\insertsubtitle};
+			\node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertauthor~$\cdot$~\insertdate};
+	  \end{tikzpicture}
+	\end{beamercolorbox}
+}
+
+\setbeamertemplate{frametitle} {
+
+  % Update the length of widest (big) progress bar to be drawn. One should be
+  % reminded that this macro needs to be invoked in each template, as length
+  % variables in LaTeX are locally-scoped.
+  \updatebigproglen
+
+  % Apply the beamer color, and use it to create a new FG color for it. This
+  % is used to draw the progress bar in the same same color as the frame title
+  % text.
+  % The color was not hardcoded in order to make it possible to change this
+  % indirectly by setting the frametitle color.
+  \usebeamercolor{frametitle}
+	\colorlet{progfg}{fg}
+
+  % Add this to remove the white top border that appears.
+	\nointerlineskip
+
+	\begin{beamercolorbox}[wd=\paperwidth, ht=1.4cm, sep=\smlsep]{frametitle}
+	  \begin{tikzpicture}
+
+	    \node[anchor=west, text depth=-0.2em, font={\usebeamercolor[bg]{frametitle}}] at (0, 0) [] (frametitle) {\insertframetitle};
+
+      % Draw the unfilled full progress bar, and superimpose it with the
+      % progress bar reflecting the current progress.
+      \draw[-*, color=darkash] (frametitle.south west) -- ++(\bigpagewidth, 0);
+			\ifnum\bigproglen=\bigpagewidth\relax
+				\draw[-*, color=progfg] (frametitle.south west) -- ++(\bigproglen, 0);
+			\else
+				\draw[color=progfg] (frametitle.south west) -- ++(\bigproglen, 0);
+			\fi
+
+      % Superimpose the frame title on the progress bar.
+			\node[anchor=west, text depth=-0.2em] at (0, 0) [] {\insertframetitle};
+	  \end{tikzpicture}
+	\end{beamercolorbox}
+}
+
+\AtBeginSection{\frame{\sectionpage}}
+\setbeamertemplate{section page} {
+
+  % Update the length of narrowest (sml) progress bar to be drawn. One should be
+  % reminded that this macro needs to be invoked in each template, as length
+  % variables in LaTeX are locally-scoped.
+	\updatesmlproglen
+
+  % Apply the beamer color, and use it to create a new FG color for it. This
+  % is used to draw the progress bar in the same same color as the section title
+  % text.
+  % The color was not hardcoded in order to make it possible to change this
+  % indirectly by setting the section title color.
+  \usebeamercolor{section page}
+	\colorlet{progfg}{fg}
+
+  % Add this to remove the white top border that appears.
+	\nointerlineskip
+
+	\begin{beamercolorbox}[wd=\paperwidth, ht=\paperheight, sep=\bigsep]{section page}
+		\begin{tikzpicture}
+
+      % Set the smaller size of slide as the canvas over which we will draw.
+      \useasboundingbox (0, 0) rectangle (\smlpagewidth, \smlpageheight);
+
+      \node [anchor=west, text depth=-0.06em] at (current bounding box.west) [font={\usebeamerfont{section title}\usebeamercolor[bg]{section title}}] (title) {\insertsection};
+
+      % Draw the unfilled full progress bar, and superimpose it with the
+      % progress bar reflecting the current progress.
+			\draw[-*, color=darkash] (title.south west) -- ++(\smlpagewidth, 0);
+			\ifnum\smlproglen=\smlpagewidth\relax
+				\draw[-*, color=progfg] (title.south west) -- ++(\smlproglen, 0);
+			\else
+				\draw[color=progfg] (title.south west) -- ++(\smlproglen, 0);
+			\fi
+
+      % Superimpose the section title on the progress bar.
+			\node [anchor=west, text depth=-0.06em] at (current bounding box.west) [font={\usebeamerfont{section title}\usebeamercolor[fg]{section title}}] (title) {\insertsection};
+		\end{tikzpicture}
+	\end{beamercolorbox}
+}
+
+\AtBeginSubsection{\frame{\subsectionpage}}
+\setbeamertemplate{subsection page} {
+
+  % Add this to remove the white top border that appears.
+	\nointerlineskip
+
+	\begin{beamercolorbox}[wd=\paperwidth, ht=\paperheight, sep=0pt]{subsection page}
+		\begin{tikzpicture}
+
+      % Set the entire slide as the canvas over which we will draw.
+      \useasboundingbox (0, 0) rectangle (\paperwidth, \paperheight);
+
+      \node [draw, text depth=-0.06em, rounded corners=0.6cm, line width=0.05cm, minimum height=1.2cm, minimum width=3cm, inner xsep=0.8cm, inner ysep=0] at (current bounding box.center) [font={\usebeamerfont{subsection title}\usebeamercolor[fg]{subsection title}}] (title) {\insertsubsection};
+		\end{tikzpicture}
+	\end{beamercolorbox}
+}
+
+\makeatletter
+\define@key{beamerframe}{subsection}[true]{%
+    % TODO: Providing the color directly is not the best solution, because for
+    % the BW theme, then royalblue must be set to black. And I don't like it.
+    \setbeamercolor{frametitle}{fg=royalblue}
+
+    % TODO: Add a boolean here so that I set it at this point to on, and
+    % reset it once the slide title is drawn in the frametitle template.
+    % For now I need the user would need to employ \begingroup and \endgroup
+    % to manage the style himself.
+
+    \setbeamertemplate{enumerate item}{
+      \tikz[baseline={([yshift=-.65ex]current bounding box.center)}]{
+          \node[draw, semithick, inner sep=0.1em, font=\sffamily\scriptsize, align=center, rotate=0, minimum width=1em, minimum height=0.9em, rounded corners=0.45em] {\insertenumlabel};
+      }
+    }
+}
+\makeatother

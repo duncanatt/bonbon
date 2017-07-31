@@ -1,0 +1,27 @@
+# Latex generated files #
+*.aux
+*.bbl
+*.blg
+*.log
+*.lof
+*.lot
+*.pdf
+*.gz
+*.out
+*.toc
+*.txss
+*.nav
+*.snm
+*.vrb
+*.synctex.gz
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.fdb_latexmk
+*.fls

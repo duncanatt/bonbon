@@ -1,0 +1,272 @@
+%!TEX program = xelatex
+\documentclass{beamer} % Use to generate the slides for the presentation.
+%\documentclass[handout,notes, gray]{beamer} % Use to print the slides and notes without animations or pauses. Gray is used to convert all color to grayscale.
+
+\usetheme{bonbon}
+
+\newcommand*{\bonbon}{BonBon\xspace}
+
+\title{\bonbon}
+\subtitle{A minimalistic theme for Beamer}
+\author{Duncan Paul Attard}
+\date{\today}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package imports and basic configuration.                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Used to display code listings.
+\usepackage{listings}
+
+% Used for drawings.
+\usepackage{tikz}
+
+% Used to insert, or not, spaces.
+\usepackage{xspace}
+
+% Used to create beautiful tables.
+\usepackage{booktabs}
+
+% Configure the style for Erlang code snippets.
+\lstset{
+	language=erlang,
+	basicstyle=\footnotesize\ttfamily,
+	aboveskip=0.2em,
+	belowskip=0.2em,
+	lineskip=0.1em,
+	numbers=left,
+	numberstyle=\tiny,
+  numbersep=1em,
+	xleftmargin=-0.4em,
+	xrightmargin=0em,
+	morecomment=[l]{\%\%},
+	breaklines=false,
+	showstringspaces=true,
+	basewidth=0.55em,
+	escapeinside={(*@}{@*)},
+	moredelim=**[is][\only<+>{\color{red}}]{@}{@},
+}
+
+% Configure libraries to be imported by TikZ.
+\usetikzlibrary {
+  positioning
+}
+
+% Uncomment this to render everything in black and white.
+% \usecolortheme{bonbonbw}
+
+\begin{document}
+
+\maketitle
+
+% Show table of contents.
+\begin{frame}{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}[fragile]{\bonbon}
+
+  % \only<1-3| handout:0>{foo}
+
+  \bonbon is a Beamer theme that renders content in a clean and
+  minimalistic fashion.
+  It can be enabled like so:
+  \begin{verbatim}  \documentclass{beamer}
+  \usetheme{bonbon}\end{verbatim}
+
+  \bonbon's color scheme balances between the simplicity of the inner slide
+  content and the colorful visual elements of section and slide titles.
+
+  \bigskip
+  The included black and white theme can be used to render content that is
+  destined for printing.
+  \begin{verbatim}  \usecolortheme{bonbonbw}\end{verbatim}
+
+  % Slide notes.
+  \note[item]{This is the first note.}
+  \note[item]{A second note.}
+\end{frame}
+
+\begin{frame}[fragile]{Sections and Subsections}
+  Sections and subsections can be used to group slides together:
+  \begin{verbatim}  \section{My Section}  \end{verbatim}
+  and
+  \begin{verbatim}  \subsection{My Subsection}  \end{verbatim}
+
+  Section slides and slide titles are equipped with a progress indicator
+  in place of slide numbers.
+\end{frame}
+
+\section{Elements}
+
+\begin{frame}{Fonts}
+  All content in \bonbon is styled using the \emph{Open Sans} font, providing
+  sensible defaults:
+  \begin{itemize}
+    \item \emph{emphasized}
+    \item \textbf{bold}
+    \item \textbf{\emph{bold emphasized}}
+    \item \alert{alerted}
+  \end{itemize}
+
+  \texttt{Monospaced} text is styled using \emph{Cousine}:
+  \begin{itemize}
+    \item \texttt{\textit{italic}}
+    \item \texttt{\textbf{bold}}
+    \item \texttt{\textbf{\textit{bold italic}}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Lists}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.33\textwidth}
+    Enumerations
+    \begin{enumerate}
+      \item First,
+      \item Second and
+      \item Third.
+    \end{enumerate}
+
+    \column{0.33\textwidth}
+      Items
+      \begin{itemize}
+        \item Java
+        \item Erlang
+        \item Python
+      \end{itemize}
+
+    \column{0.33\textwidth}
+      Descriptions
+      \begin{description}
+        \item[Private] Hidden.
+        \item[Static] Global.
+      \end{description}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Blocks}
+  Block environments are styled with a contrasting background color, isolating
+  them from the surrounding text.
+
+  \begin{block}{Default}
+    Default blocks highlight important definitions or concepts.
+  \end{block}
+
+  \begin{alertblock}{Alert}
+    Alert blocks provide advice that should't be ignored.
+  \end{alertblock}
+
+  \begin{exampleblock}{Example}
+    Example blocks aid in the understanding of an idea.
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Tables and Figures}
+\begin{columns}
+  \column{0.5\textwidth}
+  \begin{table}
+    \begin{tabular}{cl}
+      \toprule
+      Rank & Language\\
+      \midrule
+      1 & JavaScript\\
+      2 & Java\\
+      3 & Python\\
+      4 & PHP\\
+      \bottomrule
+    \end{tabular}
+    \caption{Top active languages, '17 (GitHub)}
+  \end{table}
+  \column{0.5\textwidth}
+  \begin{figure}
+    \begin{tikzpicture}
+      \tikzset{
+        component/.style={
+      		font=\footnotesize,
+      		align=center,
+      		draw,
+      		minimum width=2cm,
+      		minimum height=0.6cm,
+      		text depth=-0.08em,
+      	},
+      }
+      \node[draw, component] (server) {Server};
+      \node[draw, component, below=2cm of server] (client) {Client};
+      \draw[-stealth] ($(client.north west)+(0.2cm, 0)$) -- ($(server.south west)+(0.2cm, 0)$) node [pos=0.5, sloped, above, font=\itshape\scriptsize]{request};
+      \draw[-stealth] ($(server.south east)+(-0.2cm, 0)$) -- ($(client.north east)+(-0.2cm, 0)$) node [pos=0.5, sloped, above, font=\itshape\scriptsize]{response};
+    \end{tikzpicture}
+    \caption{Client-server communication}
+  \end{figure}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Math}
+  The binomial coefficient gives the number of ways $k$ can be chosen from $n$ without repetition:
+  \begin{equation*}
+    \frac{n!}{k!(n-k)!} = \binom{n}{k}
+  \end{equation*}
+\end{frame}
+
+\section{Subsections}
+
+\begin{frame}[fragile]{Adding breaks}
+  Subsections can be used to introduce breaks in a presentation, directing
+  attention to particular topics.
+  \begin{verbatim}  \subsection{Quiz}\end{verbatim}
+
+  Subsections are especially useful when used with the \texttt{subsection} frame
+  flag:
+  \begin{verbatim}  \begin{frame}[subsection]{Question}\end{verbatim}
+  This changes styling of the frame content to match that of the subsection
+  page, as seen next.
+\end{frame}
+
+% Subsections can be very useful to create breaks - I plan to use them for quiz
+% during the lesson delivery.
+\subsection{Quiz}
+
+{
+\begin{frame}[subsection, fragile]{Before we begin\ldots}
+  Frames having the \texttt{subsection} flag set must be grouped
+  using either \texttt{\{} and \texttt{\}} or \texttt{\textbackslash{begingroup}}
+  and \texttt{\textbackslash{endgroup}} pairs.
+
+  \bigskip
+  Notice that the color of the frame title is set to match the background of
+  the previous slide.
+
+  \bigskip
+  The subsection flag can be safely used with other flags, for instance:
+  \begin{verbatim}  \begin{frame}[subsection, fragile]{Question}\end{verbatim}
+\end{frame}
+
+\begin{frame}[subsection, fragile]{Question}
+  \begin{block}{What does this Erlang function do?}
+  \begin{lstlisting}
+  member_of(_, []) -> false;
+  member_of(X, [X | _Xs]) -> true;
+  member_of(X, [_ | Xs]) -> member_of(X, Xs).
+  \end{lstlisting}
+  \end{block}
+
+  \bigskip
+  \begin{enumerate}
+    \item It does \emph{not} compile because \texttt{\_} is an illegal character
+    \alert<2->{\item It checks whether an element is a member of the list}
+    \item It loops indefinitely due to the lack of a base case
+    \item It does \emph{not} compile because the last function clause ends with a \texttt{;}
+  \end{enumerate}
+\end{frame}
+}
+
+\begin{frame}{Conclusion}
+  The source code for this theme and demo presentation can be obtained from:
+  \begin{center}\url{github.com/duncanatt/bonbon}\end{center}
+  Enjoy!
+\end{frame}
+
+\end{document}

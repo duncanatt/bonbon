@@ -1,0 +1,84 @@
+% !TEX root = main.tex
+\documentclass[11pt, a4paper]{article}
+\input{preamble}
+
+\begin{document}
+
+  % Top matter.
+  \title{Tutorial Worksheet 1}
+  \author{Duncan Paul Attard}
+  \date{\today}
+  \maketitle
+
+  \begin{center}
+    The document was typeset using {\textit{
+    \ifPDFTeX
+      PDFTeX
+    \else
+      \ifXeTeX
+        XeTeX
+      \else
+        LuaTeX
+      \fi
+    \fi}}
+  \end{center}
+
+  \section{Installing Erlang}
+
+  The pre-built Erlang package for your operating system can be downloaded from \href{https://www.erlang-solutions.com/resources/download.html}{Erlang Solutions}.
+
+  \section{Testing the Erlang shell}
+
+  To confirm that Erlang has been successfully installed, we can try to invoke its shell.
+  This can be done by typing \texttt{erl} in your operating system's terminal.
+  You should get something that looks similar to the following:
+
+\begin{lstlisting}[language=bash]
+duncan@term:/example$ erl
+
+Erlang/OTP 18 [erts-7.2] [source] [smp:4:4] [async-threads:10] [kernel-poll:false]
+Eshell V7.2  (abort with ^G)
+1> _
+\end{lstlisting}
+
+  Type \texttt{1 + 1.} followed by enter.
+  What happens?
+  Try out other arithmetic expressions for yourself.
+  When ready, quit the Erlang shell by typing \texttt{q().}
+
+  \begin{block}{Shell expressions}
+    Erlang expressions entered in the shell \emph{must} terminate with the period symbol `\texttt{.}'.
+    Issuing enter without typing in `\texttt{.}' gives us the opportunity to type in code that can extend over multiple lines (\eg a lengthy function).
+    Code spanning multiple lines can then be terminated accordingly by typing `\texttt{.}'.
+
+    \medskip
+    To recall the latest executed shell command, tap the \emph{up} arrow key on your keyboard.
+  \end{block}
+
+\begin{assignment}
+
+  \section{Fibonacci numbers}
+
+  Write a recursive function \texttt{fib(N)} that calculates the fibonacci number for a given non-negative number (\ie $n \geq 0$).
+  Try to run your function using very large numbers and observe what happens.
+
+  \section{Fibonacci numbers revisited}
+
+  Why do you think the \texttt{fib(N)} did not perform as well as expected when tested with large numbers?
+
+  \medskip
+  Implement a new tail-recursive function \texttt{fib2(N)} that calculates the fibonacci number using \emph{two} accumulator values to store the values for $n - 1$ and $n - 2$. The following snippet should act as a scaffolding for your work.
+
+\begin{lstlisting}{language=erlang}
+fib2(N) -> fib2(N, 1, 0).
+fib2(0, (*@\textit{Nminus1}@*), (*@\textit{Nminus2}@*)) ->
+  % Base case implementation.
+  ok;
+fib2(N, (*@\textit{Nminus1}@*), (*@\textit{Nminus2}@*)) ->
+  % Recursive case implementation.
+  ok.
+\end{lstlisting}
+
+\end{assignment}
+
+\end{document}

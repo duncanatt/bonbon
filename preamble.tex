@@ -1,0 +1,236 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package imports and basic configuration.                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Used to determine which typesetting engine is being used. This makes it
+% possible to tailor the configuration for specific engines later.
+\usepackage{iftex}
+
+% Load font packages according to the typesetting engine being used.
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\else
+  \ifXeTeX
+    \usepackage{fontspec}
+  \else
+    \usepackage{luatextra}
+  \fi
+\fi
+
+% Used for formatting chapter and section titles including their spacing.
+\usepackage{titlesec}
+
+% Used to support subfigures, *without* loading the caption package,
+% as this clashes with the River Publishers class file.
+\usepackage[caption=false]{subfig}
+
+% Used to wrap text around figures.
+\usepackage{wrapfig}
+
+% Used for color support.
+\usepackage[table]{xcolor}
+
+% Used to import graphics.
+\usepackage{graphicx}
+
+% Used for floating figures.
+\usepackage{float}
+
+% Used to provide extra mathematical fonts and symbols.
+\usepackage{amsfonts}
+
+% Used for facilitating the writing of mathematical formulas.
+\usepackage{amsmath}
+
+% Used for mathematical theorems and definition support.
+\usepackage{amsthm}
+
+% Used for extended mathematical symbols like black square, etc.
+\usepackage{amssymb}
+
+% Used for drawing extended mathematical symbols like HML denotation brackets..
+\usepackage{stmaryrd}
+
+% Used for dingbats.
+\usepackage{pifont}
+
+% Used for drawings.
+\usepackage{tikz}
+
+% Used to draw frames around text.
+\usepackage{mdframed}
+
+% Used to insert, or not, spaces.
+\usepackage{xspace}
+
+% Used to display code listings.
+\usepackage{listings}
+
+% Used to display algorithms.
+% \usepackage[linesnumbered, lined, noresetcount]{algorithm2e}
+
+% Used for modifying enumeration items bullets and to create inline lists.
+\usepackage[inline]{enumitem}
+
+% Used to underline text that supports line breaks.
+\usepackage[normalem]{ulem}
+
+% Used to enable hyperlinks in the documents where cross-referencing occurs.
+\usepackage{hyperref}
+
+% Used to for making references include the caption label (e.g. figure, eq, etc.)
+\usepackage[nameinlink]{cleveref}
+
+% Used for numbering lines in math environments.
+\usepackage[mathlines]{lineno}
+
+% \usepackage{mathspec}
+% \setallmainfonts(Digits,Latin){Georgia}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Extended package configuration.                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Configure libraries to be imported by TikZ.
+\usetikzlibrary{
+  calc,
+  arrows
+}
+
+% Configure the general style for code snippets.
+\lstset{
+	% language=erlang,
+	basicstyle=\footnotesize\ttfamily,
+	aboveskip=1em,
+	belowskip=1em,
+	lineskip=0.1em,
+	numbers=left,
+	numberstyle=\tiny,
+  numbersep=1em,
+	xleftmargin=1em,
+	xrightmargin=0em,
+	morecomment=[l]{\%\%},
+	breaklines=false,
+	showstringspaces=true,
+	basewidth=0.55em,
+	escapeinside={(*@}{@*)},
+	moredelim=**[is][\only<+>{\color{red}}]{@}{@},
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Generic configuration.                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Color definitions.
+\definecolor{bloodred}{RGB}{168, 43, 51}
+\definecolor{royalblue}{RGB}{53, 171, 223}
+\definecolor{mossgreen}{RGB}{34, 171, 66}
+\definecolor{amber}{RGB}{233, 129, 45}
+\definecolor{lightash}{RGB}{230, 230, 230}
+\definecolor{darkash}{RGB}{211, 211, 211}
+
+% Set up typography according to the typesetting engine being used.
+\ifPDFTeX
+
+  % Define the title font family to do nothing.
+  \newcommand{\fflobster}{\relax}
+\else
+
+  % Use standard TeX ligatures.
+  \defaultfontfeatures{Ligatures=TeX}
+
+  % Define the title font family.
+  \newfontfamily\fflobster{Lobster Two}
+
+  % Set font style based on the Open Sans and Cousine fonts.
+  \setmainfont[ItalicFont={Open Sans Light Italic},
+               BoldFont={Open Sans SemiBold},
+               BoldItalicFont={Open Sans SemiBold Italic}]
+              {Open Sans Light}
+  \setsansfont[ItalicFont={Open Sans Light Italic},
+  						 BoldFont={Open Sans SemiBold},
+  						 BoldItalicFont={Open Sans SemiBold Italic}]
+  						{Open Sans Light}
+  \setmonofont[ItalicFont={Cousine Italic},
+  						 BoldFont={Cousine Bold},
+  						 BoldItalicFont={Cousine Bold Italic}]{Cousine}
+\fi
+
+\makeatletter
+
+% Customize title page.
+\renewcommand{\maketitle}{
+
+  \begin{center}
+
+    % Draw title.
+    {\LARGE\fflobster\color{bloodred}\@title}
+
+    % Draw separator.
+    \tikz[baseline={([yshift=-0.6em]current bounding box.center)}]{
+      \draw[*-*, draw, color=bloodred] (0, 0) -- ++(\textwidth, 0);
+    }
+
+    % Add the author and date.
+    \bigskip
+    {\@author~$\cdot$~\@date}
+  \end{center}
+
+  \bigskip
+}
+
+\makeatother
+
+% Set title style for sections. Note that with titlesec, anything that is placed
+% around \thesection is placed around the section number in the rendered text.
+\titleformat{\section}{\bfseries\large}{Task~\thesection~$\cdot$}{0.4em}{}
+
+% Define new environment to delineate assignment questions.
+\newenvironment{assignment}{
+  \titleformat{\section}{\bfseries\large}{Task~\thesection*~$\cdot$}{0.4em}{}
+}
+
+\newenvironment{block}[1]{
+  \begin{center}
+
+    % Add vertical spacing between table rows.
+    \renewcommand{\arraystretch}{1.5}
+
+    % Create table to hold the contents of the block, highlighting the title
+    % and body using two different colors.
+    \begin{tabular}{p{0.9\textwidth}}
+      \rowcolor{darkash}\textbf{#1}\\
+      \rowcolor{lightash}}{\\
+    \end{tabular}
+  \end{center}
+}
+
+% Configure Hyperref colours.
+\hypersetup{
+  colorlinks,
+  linkcolor=bloodred,
+  citecolor=mossgreen,
+  urlcolor=royalblue
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macro definitions.                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Latin and other abbreviations.
+\newcommand*{\eg}{\textit{e.g.}\xspace}
+\newcommand*{\Eg}{\textit{E.g.}\xspace}
+\newcommand*{\ie}{\textit{i.e.,}\xspace}
+\newcommand*{\etc}{\textit{etc.}\xspace}
+\newcommand*{\corr}{\textit{corr.}\xspace}
+\newcommand*{\etal}{\textit{et.~al}\xspace}
+\newcommand*{\wrt}{w.r.t.\xspace}
+\newcommand*{\cf}{\textit{cf.}\xspace}
+\newcommand*{\nb}{\textit{n.b.}\xspace}
+\newcommand*{\visavis}{\textit{vis-\`a-vis}\xspace}
+\newcommand*{\resp}{resp.\xspace}
+\newcommand*{\vs}{\textit{vs.}\xspace}

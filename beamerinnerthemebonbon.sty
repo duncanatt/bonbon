@@ -49,14 +49,19 @@
 \newlength{\bigproglen}
 \deflength{\smlprogtotal}{\smlpagewidth - \linethick}
 \deflength{\bigprogtotal}{\bigpagewidth - \linethick}
-
-% TODO: for the first slide do not subtract the current frame number in order to
-% make it possible to ignore the first titleslide in the calculation.
 \newcommand{\updatesmlprog}{
-  \setlength{\smlproglen}{(\smlprogtotal * \insertframenumber) / \inserttotalframenumber}\relax
+  \ifnum\inserttotalframenumber=1\relax
+    \setlength{\smlproglen}{0pt}
+  \else
+    \setlength{\smlproglen}{(\smlprogtotal * (\insertframenumber - 1)) / (\inserttotalframenumber - 1)}\relax
+  \fi
 }
 \newcommand{\updatebigprog}{
-  \setlength{\bigproglen}{(\bigprogtotal * \insertframenumber) / \inserttotalframenumber}\relax
+  \ifnum\inserttotalframenumber=1\relax
+    \setlength{\bigproglen}{0pt}
+  \else
+    \setlength{\bigproglen}{(\bigprogtotal * (\insertframenumber - 1)) / (\inserttotalframenumber - 1)}\relax
+  \fi
 }
 
 

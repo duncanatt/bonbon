@@ -185,7 +185,11 @@
 	\end{beamercolorbox}
 }
 
-\makeatletter
+% We do not need to use \makeatletter here (even though we are using @ in names)
+% because the cat code for @ is set automatically to 11 (i.e. the catcode for
+% letters) in .sty and .cls files. Note that this would however need to be set
+% to 11 manually (using \makeatletter) and back to 12 (using \makeatother) in
+%.tex files.
 \define@key{beamerframe}{subsection}[true]{%
     % TODO: Providing the color directly is not the best solution, because for
     % the BW theme, then royalblue must be set to black. And I don't like it.
@@ -202,4 +206,3 @@
       }
     }
 }
-\makeatother

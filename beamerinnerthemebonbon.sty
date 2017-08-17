@@ -47,22 +47,41 @@
 % The two macros below calculate the length of the progress bar in both cases.
 \newlength{\smlproglen}
 \newlength{\bigproglen}
-\deflength{\smlprogtotal}{\smlpagewidth - \linethick}
-\deflength{\bigprogtotal}{\bigpagewidth - \linethick}
+%\deflength{\smlprogtotal}{\smlpagewidth - \linethick}
+%\deflength{\bigprogtotal}{\bigpagewidth - \linethick}
+%\newcommand{\updatesmlprog}{
+%  \ifnum\inserttotalframenumber=1\relax
+%    \setlength{\smlproglen}{0pt}
+%  \else
+%    \setlength{\smlproglen}{(\smlprogtotal * (\insertframenumber - 1)) / (\inserttotalframenumber - 1)}\relax
+%  \fi
+%}
+%\newcommand{\updatebigprog}{
+%  \ifnum\inserttotalframenumber=1\relax
+%    \setlength{\bigproglen}{0pt}
+%  \else
+%    \setlength{\bigproglen}{(\bigprogtotal * (\insertframenumber - 1)) / (\inserttotalframenumber - 1)}\relax
+%  \fi
+%}
+
+% TODO: Fix this big and nasty hack! But I was pressed with time :(
+\deflength{\smlprogtotal}{((\smlpagewidth / 100) - \linethick) * 100}
+\deflength{\bigprogtotal}{((\bigpagewidth / 100) - \linethick) * 100}
 \newcommand{\updatesmlprog}{
   \ifnum\inserttotalframenumber=1\relax
     \setlength{\smlproglen}{0pt}
   \else
-    \setlength{\smlproglen}{(\smlprogtotal * (\insertframenumber - 1)) / (\inserttotalframenumber - 1)}\relax
+    \setlength{\smlproglen}{(((\smlprogtotal / 100) * (\insertframenumber - 1)) / (\inserttotalframenumber - 1)) * 100}\relax
   \fi
 }
 \newcommand{\updatebigprog}{
   \ifnum\inserttotalframenumber=1\relax
     \setlength{\bigproglen}{0pt}
   \else
-    \setlength{\bigproglen}{(\bigprogtotal * (\insertframenumber - 1)) / (\inserttotalframenumber - 1)}\relax
+    \setlength{\bigproglen}{(((\bigprogtotal / 100) * (\insertframenumber - 1)) / (\inserttotalframenumber - 1)) * 100}\relax
   \fi
 }
+% TODO: End nasty hack!
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

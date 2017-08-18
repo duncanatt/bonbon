@@ -65,8 +65,8 @@
 %}
 
 % TODO: Fix this big and nasty hack! But I was pressed with time :(
-\deflength{\smlprogtotal}{((\smlpagewidth / 100) - \linethick) * 100}
-\deflength{\bigprogtotal}{((\bigpagewidth / 100) - \linethick) * 100}
+\deflength{\smlprogtotal}{((\smlpagewidth - \linethick) / 100) * 100}
+\deflength{\bigprogtotal}{((\bigpagewidth - \linethick) / 100) * 100}
 \newcommand{\updatesmlprog}{
   \ifnum\inserttotalframenumber=1\relax
     \setlength{\smlproglen}{0pt}

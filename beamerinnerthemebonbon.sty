@@ -93,7 +93,7 @@
 \setbeamertemplate{caption}{\insertcaption}
 \setbeamertemplate{caption label separator}{}
 
-\setbeamertemplate{title page} {
+\setbeamertemplate{title page}{%
 
   % Add this to remove the white top border that appears.
   \nointerlineskip
@@ -105,14 +105,14 @@
 			\useasboundingbox (0, 0) rectangle (\smlpagewidth, \smlpageheight);
 
       % Draw title, subtitle, author and date text.
-			\node [anchor=west, rotate=0] at (current bounding box.west) [font={\usebeamerfont{title}\usebeamercolor[fg]{title}}] (title) {\inserttitle};
+			\node [anchor=west, rotate=0, text width=\smlpagewidth] at (current bounding box.west) [font={\usebeamerfont{title}\usebeamercolor[fg]{title}}] (title) {\inserttitle};
 			\node [anchor=west, yshift=-0.0cm] at (title.south west) [font={\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}}] (subtitle) {\insertsubtitle};
 			\node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertauthor~$\cdot$~\insertdate};
 	  \end{tikzpicture}
 	\end{beamercolorbox}
 }
 
-\setbeamertemplate{frametitle} {
+\setbeamertemplate{frametitle}{%
 
   % Update the length of widest (big) progress bar to be drawn. One should be
   % reminded that this macro needs to be invoked in each template, as length
@@ -151,7 +151,7 @@
 }
 
 \AtBeginSection{\frame{\sectionpage}}
-\setbeamertemplate{section page} {
+\setbeamertemplate{section page}{%
 
   % Update the length of narrowest (sml) progress bar to be drawn. One should be
   % reminded that this macro needs to be invoked in each template, as length
@@ -229,4 +229,11 @@
           \node[draw, semithick, inner sep=0.1em, font=\sffamily\scriptsize, align=center, rotate=0, minimum width=1em, minimum height=0.9em, rounded corners=0.45em] {\insertenumlabel};
       }
     }
+}
+
+\setbeamertemplate{note page}{%
+  \vspace{2em}
+  \textbf{\insertframetitle}
+  \vspace{0.5em}
+  \insertnote
 }

@@ -107,7 +107,10 @@
       % Draw title, subtitle, author and date text.
 			\node [anchor=west, rotate=0, text width=\smlpagewidth] at (current bounding box.west) [font={\usebeamerfont{title}\usebeamercolor[fg]{title}}] (title) {\inserttitle};
 			\node [anchor=west, yshift=-0.0cm] at (title.south west) [font={\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}}] (subtitle) {\insertsubtitle};
-			\node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertauthor~$\cdot$~\insertdate};
+			%\node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertauthor~$\cdot$~\insertdate};
+      \node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (institute) {\insertinstitute};
+      \node [anchor=south west, inner ysep=4pt] at (institute.north west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertauthor~$\cdot$~\insertdate};
+
 	  \end{tikzpicture}
 	\end{beamercolorbox}
 }

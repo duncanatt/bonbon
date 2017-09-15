@@ -1,9 +1,16 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerouterthemebonbon}[2017/07/30 Bonbon outer theme]
 
+% Used to change the font size.
+\RequirePackage{anyfontsize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Outer template styles.                                                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[text line]{%
+  \ifnum\insertframenumber>1\relax
+  \parbox{\linewidth}{\fontsize{1}{1}\tiny\vspace{-5em}\usebeamercolor{normal text}\hfill\colorbox{lightash}{\insertshortauthor~$\cdot$~\insertinstitute\par}}
+  \fi
+}

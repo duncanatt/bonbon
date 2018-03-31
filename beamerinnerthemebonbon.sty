@@ -21,25 +21,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Creates a new length and initializes it with the specified dimension.
-\newcommand{\deflength}[2]{
+\newcommand{\declength}[2]{
   \newlength{#1}
   \setlength{#1}{#2}
 }
 
 % The separation lengths that determine by how much the slide content is shifted
 % to the right.
-\deflength{\smlsep}{0.4cm}
-\deflength{\bigsep}{0.8cm}
+\declength{\smlsep}{0.4cm}
+\declength{\bigsep}{0.8cm}
 
 % The thickness with which the lines are drawn.
-\deflength{\linethick}{0.4pt}
+\declength{\linethick}{0.4pt}
 
 % The template uses two page dimensions, the smaller one for title pages, and
 % the larger one for slide content.
-\deflength{\smlpagewidth}{\paperwidth - (\bigsep * 2)}
-\deflength{\smlpageheight}{\paperheight - (\bigsep * 2)}
-\deflength{\bigpagewidth}{\paperwidth - (\smlsep * 2)}
-\deflength{\bigpageheight}{\paperheight - (\smlsep * 2)}
+\declength{\smlpagewidth}{\paperwidth - (\bigsep * 2)}
+\declength{\smlpageheight}{\paperheight - (\bigsep * 2)}
+\declength{\bigpagewidth}{\paperwidth - (\smlsep * 2)}
+\declength{\bigpageheight}{\paperheight - (\smlsep * 2)}
 
 % The template features a progress bar which shows indicates the current
 % presentation progress. It comes in two flavours, one that fits \smlpagewidth
@@ -47,8 +47,8 @@
 % The two macros below calculate the length of the progress bar in both cases.
 \newlength{\smlproglen}
 \newlength{\bigproglen}
-%\deflength{\smlprogtotal}{\smlpagewidth - \linethick}
-%\deflength{\bigprogtotal}{\bigpagewidth - \linethick}
+%\declength{\smlprogtotal}{\smlpagewidth - \linethick}
+%\declength{\bigprogtotal}{\bigpagewidth - \linethick}
 %\newcommand{\updatesmlprog}{
 %  \ifnum\inserttotalframenumber=1\relax
 %    \setlength{\smlproglen}{0pt}
@@ -65,8 +65,8 @@
 %}
 
 % TODO: Fix this big and nasty hack! But I was pressed with time :(
-\deflength{\smlprogtotal}{((\smlpagewidth - \linethick) / 100) * 100}
-\deflength{\bigprogtotal}{((\bigpagewidth - \linethick) / 100) * 100}
+\declength{\smlprogtotal}{((\smlpagewidth - \linethick) / 100) * 100}
+\declength{\bigprogtotal}{((\bigpagewidth - \linethick) / 100) * 100}
 \newcommand{\updatesmlprog}{
   \ifnum\inserttotalframenumber=1\relax
     \setlength{\smlproglen}{0pt}
@@ -108,7 +108,7 @@
 			\node [anchor=west, rotate=0, text width=\smlpagewidth] at (current bounding box.west) [font={\usebeamerfont{title}\usebeamercolor[fg]{title}}] (title) {\inserttitle};
 			\node [anchor=west, yshift=-0.0cm] at (title.south west) [font={\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}}] (subtitle) {\insertsubtitle};
 			%\node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertauthor~$\cdot$~\insertdate};
-      \node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (institute) {\insertinstitute};
+      \node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (institute) {\usebeamerfont{institute}\insertinstitute};
       \node [anchor=south west, inner ysep=4pt] at (institute.north west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertauthor~$\cdot$~\insertdate};
 
 	  \end{tikzpicture}
@@ -149,6 +149,7 @@
 
       % Superimpose the frame title on the progress bar.
 			\node[anchor=west, text depth=-0.2em] at (0, 0) [] {\insertframetitle};
+      %\node[overlay, inner sep=0, anchor=east] at ($(current bounding box.east)+(0,-0.5em)$){\includegraphics[scale=0.06]{/Users/duncan/Downloads/Halloween-PNG-Images.png}};
 	  \end{tikzpicture}
 	\end{beamercolorbox}
 }

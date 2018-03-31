@@ -18,4 +18,4 @@ if you're running MacTeX on Mac OS X. If the directory structure does not exist,
 
 Symbolic links are created as follows:
 
-`ln -s /path/to/original /path/to/symlink` (_e.g._ ln -s bonbon /Users/duncan/Dropbox/PhD/Teaching/bonbon)
+`ln -s /path/to/original /path/to/symlink` (_e.g._ `ln -s bonbon /Users/duncan/Dropbox/PhD/Teaching/bonbon`)

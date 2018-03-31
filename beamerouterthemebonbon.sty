@@ -9,8 +9,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setbeamertemplate{navigation symbols}{}
+% \setbeamertemplate{footline}[text line]{%
+%   \ifnum\insertframenumber>1\relax
+%   \parbox{\linewidth}{\fontsize{4pt}{1pt}\selectfont\vspace{-5em}\usebeamercolor{normal text}\hfill\colorbox{lightash}{\insertshortauthor~$\cdot$~{\insertinstitute}\par}}
+%   \fi
+% }
 \setbeamertemplate{footline}[text line]{%
   \ifnum\insertframenumber>1\relax
-  \parbox{\linewidth}{\fontsize{1}{1}\tiny\vspace{-5em}\usebeamercolor{normal text}\hfill\colorbox{lightash}{\insertshortauthor~$\cdot$~\insertinstitute\par}}
+  \parbox{\linewidth}{\fontsize{4pt}{1pt}\selectfont\vspace{-5em}\usebeamercolor{normal text}\hfill\colorbox{lightash}{\insertshortauthor\par}}
   \fi
 }

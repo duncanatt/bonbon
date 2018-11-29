@@ -6,11 +6,11 @@ The argument of `\usepackage` is a name not a file path. The fact that it someti
 
 The best thing is to put the style files in the directory:
 
-`~/texmf/tex/latex/mystyles/`
+`~/texmf/tex/latex/`
 
 where LaTeX will always look for packages, without the need to specify relative paths. Use
 
-`~/Library/texmf/tex/latex/mystyles/`
+`~/Library/texmf/tex/latex/`
 
 if you're running MacTeX on Mac OS X. If the directory structure does not exist, create it. You can also decide to put symbolic links in that special place, so you don't need to maintain files in different places.
 

@@ -16,6 +16,11 @@
 % }
 \setbeamertemplate{footline}[text line]{%
   \ifnum\insertframenumber>1\relax
-  \parbox{\linewidth}{\fontsize{4pt}{1pt}\selectfont\vspace{-5em}\usebeamercolor{normal text}\hfill\colorbox{lightash}{\insertshortauthor\par}}
+  \parbox{\linewidth}{\fontsize{4pt}{1pt}\selectfont\vspace{-5em}\usebeamercolor{normal text}\hfill\insertshortauthor~$\cdot$~{\insertinstitute}\par}
   \fi
 }
+% \setbeamertemplate{footline}[text line]{%
+%   \ifnum\insertframenumber>1\relax
+%   \parbox{\linewidth}{\fontsize{4pt}{1pt}\selectfont\vspace{-5em}\usebeamercolor{normal text}\hfill\colorbox{lightash}{\insertshortauthor\par}}
+%   \fi
+% }

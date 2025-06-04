@@ -19,3 +19,10 @@ if you're running MacTeX on Mac OS X. If the directory structure does not exist,
 Symbolic links are created as follows:
 
 `ln -s /path/to/original /path/to/symlink` (_e.g._ `ln -s /Users/duncan/Dropbox/PhD/Development/bonbon bonbon`)
+
+# Installing Fonts #
+
+Fonts can be installed via Homebrew if you're on macOS. These fonts are required:
+- **Open Sans:** `brew install --cask font-fira-sans`
+- **Lobster Two:** `brew install --cask font-lobster-two`
+- **Cousine:** `brew install --cask font-fira-code`

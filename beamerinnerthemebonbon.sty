@@ -107,12 +107,18 @@
 			\useasboundingbox (0, 0) rectangle (\smlpagewidth, \smlpageheight);
 
       % Draw title, subtitle, author and date text.
-			\node [anchor=west, rotate=0, text width=\smlpagewidth] at (current bounding box.west) [font={\usebeamerfont{title}\usebeamercolor[fg]{title}}] (title) {\inserttitle};
-			\node [anchor=west, yshift=-0.0cm] at (title.south west) [font={\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}}] (subtitle) {\insertsubtitle};
+			\node [anchor=west, rotate=0, text width=\smlpagewidth, yshift=2em] at (current bounding box.west) [font={\usebeamerfont{title}\usebeamercolor[fg]{title}}] (title) {\inserttitle};
+			\node [anchor=west, yshift=-0.0cm] at (title.south west) [font={\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}}] (subtitle) {XX\insertsubtitle};
 			%\node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertauthor~$\cdot$~\insertdate};
       \node [anchor=south west, inner ysep=0] at (current bounding box.south west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (fineprint) {\tiny\insertfineprint};
       \node [anchor=south west, inner ysep=4pt] at (fineprint.north west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (institute) {\usebeamerfont{institute}\insertinstitute};
-      \node [anchor=south west, inner ysep=0] at (institute.north west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertdate~$\cdot$~\insertauthor};
+      
+      % Institute logos.
+      % \node [anchor=west, inner sep=0] at ($(current bounding box.south west)+(0,0.1em)$) (institute) {\includegraphics[width=.2\textwidth, trim={0 0 0 0}, clip]{logos/uog-logo.eps}};
+      % \node [anchor=east, inner sep=0] at ($(current bounding box.south east)+(0,0.1em)$) (institute_n) {\includegraphics[width=.1\textwidth, trim={0 0 0 0}, clip]{logos/gssi-logo.png}};
+      % \node [inner sep=0] at ($(institute.east)!0.3!(institute_n.west)$) (institute_2) {\includegraphics[width=.195\textwidth, trim={3cm 3.1cm 3cm 3.1cm}, clip]{logos/um-logo.eps}};
+      % \node [inner sep=0] at ($(institute.east)!0.6!(institute_n.west)$) (institute_2) {\includegraphics[width=.07\textwidth, trim={0 0 0 0}, clip]{logos/ru-logo.eps}};
+      \node [anchor=south west, inner ysep=0, yshift=0.4em] at (institute.north west) [font={\usebeamerfont{subsubtitle}\usebeamercolor[fg]{subsubtitle}}] (author) {\insertdate~$\cdot$~\insertauthor};
 	  \end{tikzpicture}
 	\end{beamercolorbox}
 }

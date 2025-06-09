@@ -22,7 +22,7 @@ Symbolic links are created as follows:
 
 # Installing Fonts #
 
-Fonts can be installed via Homebrew if you're on macOS. These fonts are required:
+Fonts can be installed via Homebrew if you're on macOS, or alternatively, from Google Fonts. These fonts are required:
 - **Open Sans:** `brew install --cask font-fira-sans`
 - **Lobster Two:** `brew install --cask font-lobster-two`
 - **Cousine:** `brew install --cask font-fira-code`
